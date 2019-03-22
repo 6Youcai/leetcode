@@ -99,3 +99,18 @@ class Solution(object):
 ```
 
 计算一个数是否为3的幂次方，一种方法是从小到大计算3^1 3^2 3^n，直至结果大于等于输入的数；另一种思路是看这个数是否为3的倍数；以输入100为例，第一种法法需要计算直至3^5，而后一种方法则只需进行一次计算，提高了效率。
+
+- [Keyboard Row](https://leetcode.com/problems/keyboard-row/)
+
+```
+import re
+class Solution(object):
+    def findWords(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        return [w for w in words if re.search("^([asdfghjkl]+|[zxcvbnm]+|[qwertyuiop]+)$", w, re.I)]        
+```
+
+一开始使用的办法不够优雅，直至看到[这个答案](https://leetcode.com/problems/keyboard-row/discuss/259735/Python-one-liner-with-regex)。
