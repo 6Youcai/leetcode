@@ -78,3 +78,24 @@ class Solution:
             return False
         return True
 ```
+
+- [Power of Three](https://leetcode.com/problems/power-of-three/)
+
+```
+class Solution(object):
+    def isPowerOfThree(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        # 3**0 = 1
+        if n < 1:
+            return False
+        while n % 3 == 0:
+            n = n / 3
+        if n == 1:
+            return True
+        return False
+```
+
+计算一个数是否为3的幂次方，一种方法是从小到大计算3^1 3^2 3^n，直至结果大于等于输入的数；另一种思路是看这个数是否为3的倍数；以输入100为例，第一种法法需要计算直至3^5，而后一种方法则只需进行一次计算，提高了效率。
