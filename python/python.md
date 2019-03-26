@@ -114,3 +114,30 @@ class Solution(object):
 ```
 
 一开始使用的办法不够优雅，直至看到[这个答案](https://leetcode.com/problems/keyboard-row/discuss/259735/Python-one-liner-with-regex)。
+
+- [Pairs of Songs With Total Durations Divisible by 60](https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/)
+
+判断两个数的和是否能够被一个数整除，最简单的想法是将所有的组合计算一下，然而当我这么做了，却得到`Time Limit Exceeded`，翻看讨论看到[这位老兄的方法](https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/discuss/256738/JavaC%2B%2BPython-Two-Sum-with-K-60)，简直是帅呆了。
+
+不就是两个数嘛，一个数能提供一部分，另外看还有几个数能满足另一部分，并将中间的一些过程记录下来。
+
+```
+class Solution(object):
+    def numPairsDivisibleBy60(self, time):
+        """
+        :type time: List[int]
+        :rtype: int
+        """
+        remainder = {}
+        res = 0
+        for t in time:
+            # this t need one be paird
+            ne = -t % 60
+            res += remainder.get(ne, 0)
+            
+            # this t produce
+            re = t % 60
+            remainder[re] = remainder.get(re, 0) + 1
+            
+        return res
+```
