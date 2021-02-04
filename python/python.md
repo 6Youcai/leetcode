@@ -141,3 +141,18 @@ class Solution(object):
             
         return res
 ```
+
+- [Assign Cookies](https://leetcode.com/problems/assign-cookies/)
+
+```
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        # 因为饥饿度最小的孩子最容易吃饱，所以我们先考虑这个孩子
+        g.sort()
+        s.sort()
+        child, cookie = 0, 0
+        while child < len(g) and cookie < len(s):
+            child += 1 if g[child] <= s[cookie] else 0
+            cookie += 1
+        return  child
+```
