@@ -156,3 +156,24 @@ class Solution:
             cookie += 1
         return  child
 ```
+
+- [Candy](https://leetcode.com/problems/candy/)
+
+```
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        L = len(ratings)
+        if L == 1:
+            return 1
+
+        out = [1] * L # 初始化
+        # 如果右边孩子的评分比左边的高
+        for i in range(L-1):
+            if ratings[i] < ratings[i+1]:
+                out[i+1] = out[i] + 1 
+        # 如果左边孩子的评分比右边的高
+        for i in range(L-1, 0, -1):
+            if ratings[i-1] > ratings[i] and out[i-1] <= out[i]:
+                out[i-1] = out[i] + 1
+        return sum(out)
+```
