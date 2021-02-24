@@ -4,10 +4,10 @@
 class Solution:
     def maxIncreaseKeepingSkyline(self, grid: List[List[int]]) -> int:
         x, y = len(grid), len(grid[0])
-        
+
         left = [max(grid[i]) for i in range(x)]
         top = [max([grid[j][i] for j in range(x)]) for i in range(y)]
-        
+
         res = 0
         for i in range(x):
             for j in range(y):
@@ -24,13 +24,13 @@ class Solution:
         res = set()
         for e in emails:
             local, domain = e.split('@')
-            
+
             local = local.replace(".", "")
             local = local.split("+")[0]
-            
+
             e = local + domain
             res.add(e)
-            
+
         return len(res)
 ```
 
@@ -110,7 +110,7 @@ class Solution(object):
         :type words: List[str]
         :rtype: List[str]
         """
-        return [w for w in words if re.search("^([asdfghjkl]+|[zxcvbnm]+|[qwertyuiop]+)$", w, re.I)]        
+        return [w for w in words if re.search("^([asdfghjkl]+|[zxcvbnm]+|[qwertyuiop]+)$", w, re.I)]
 ```
 
 一开始使用的办法不够优雅，直至看到[这个答案](https://leetcode.com/problems/keyboard-row/discuss/259735/Python-one-liner-with-regex)。
@@ -134,11 +134,11 @@ class Solution(object):
             # this t need one be paird
             ne = -t % 60
             res += remainder.get(ne, 0)
-            
+
             # this t produce
             re = t % 60
             remainder[re] = remainder.get(re, 0) + 1
-            
+
         return res
 ```
 
@@ -170,10 +170,62 @@ class Solution:
         # 如果右边孩子的评分比左边的高
         for i in range(L-1):
             if ratings[i] < ratings[i+1]:
-                out[i+1] = out[i] + 1 
+                out[i+1] = out[i] + 1
         # 如果左边孩子的评分比右边的高
         for i in range(L-1, 0, -1):
             if ratings[i-1] > ratings[i] and out[i-1] <= out[i]:
                 out[i-1] = out[i] + 1
         return sum(out)
+```
+
+- [Prime Palindrome](https://leetcode.com/problems/prime-palindrome/)
+
+```
+def isPrime(N):
+    m = int(math.sqrt(N))
+    for i in range(2, N**0.5 + 1):
+        if N%i == 0:
+            return False
+    return True
+
+class Solution:
+    # my own code
+    def primePalindrome(self, N: int) -> int:
+        if N == 1:
+            return 2
+        while True:
+            s = str(N)
+            if s == s[::-1]:
+                if isPrime(N):
+                    return N
+            # the next Palindrme, core
+            l = len(s)
+            if l < 2:
+                N += 1
+                continue
+            if s == '9' * l:
+                N += 2
+                continue
+            left = s[: l//2]
+            if l%2 == 0:
+                p = int(left + left[::-1])
+                if N < p:
+                    N = p
+                else:
+                    left = str(int(left) + 1)
+                    N = int(left + left[::-1])
+                continue
+            else:
+                mid = s[l//2]
+                p = int(left + mid + left[::-1])
+                if N < p:
+                    N = p
+                else:
+                    if mid != '9':
+                        mid = str(int(mid) + 1)
+                        N = int(left + mid + left[::-1])
+                    else:
+                        left = str(int(left)+1)
+                        N = int(left + '0' + left[::-1])
+                continue
 ```
