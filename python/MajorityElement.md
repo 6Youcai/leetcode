@@ -1,6 +1,5 @@
 # 回字的四种写法
 
-> 
 给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数 大于 n/2 的元素。
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
 
@@ -36,7 +35,6 @@ class Solution:
         return nums[len(nums)//2]
 ```
 
-
 ## Randomization
 随缘吧，反正选到正确答案的概率还蛮大的。
 ```
@@ -50,7 +48,6 @@ class Solution:
             if sum(1 for elem in nums if elem == candidate) > majority_count:
                 return candidate
 ```
-
 
 ## Divide and Conquer
 拆分后我依然是老大，而且比另一半的老大还要大。
@@ -82,12 +79,7 @@ class Solution:
 ```
 
 ## Boyer-Moore Voting Algorithm
-叹为观止的算法
-
 依次上擂台拉一个反对派下来，没有反对派就留下；
-
-[](https://www.cs.utexas.edu/~moore/best-ideas/mjrty/example.html)
-
 ```
 class Solution:
     def majorityElement(self, nums):
@@ -101,3 +93,4 @@ class Solution:
 
         return candidate
 ```
+[叹为观止](https://www.cs.utexas.edu/~moore/best-ideas/mjrty/example.html)
