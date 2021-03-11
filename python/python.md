@@ -178,6 +178,27 @@ class Solution:
         return sum(out)
 ```
 
+```{c++}
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        int L = ratings.size();
+        if(L==1)
+            return 1;
+        vector<int> res(L, 1);
+        for(int i=0; i<L-1; i++) {
+            if(ratings[i] < ratings[i+1])
+                res[i+1] = res[i] +1;
+        }
+        for(int i=L-1; i>0; i--) {
+            if(ratings[i-1] > ratings[i] && res[i-1] <= res[i])
+                res[i-1] = res[i] + 1;
+        }         
+        return accumulate(res.begin(), res.end(), 0);
+    }
+};
+```
+
 - [Prime Palindrome](https://leetcode.com/problems/prime-palindrome/)
 
 ```
